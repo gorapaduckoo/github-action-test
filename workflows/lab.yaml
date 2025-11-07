@@ -1,0 +1,29 @@
+#워크플로우의 이름
+name: LAB - Sample lab
+
+# 워크플로우실행을 위한 트리거 정의. workflow_dispatch 는 사용자에 의한 수동 트리거
+on: workflow_dispatch
+
+#워크플로우에서 실행하고자 하는 작업에 대한 정의
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout 
+      uses: actions/checkout@v2
+      
+    - name: Build project
+      run: |
+        echo "FastCampus CICD Build Project"
+        
+    - name: Run tests
+      run: |
+        echo "Run Test"
+        
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy to production
+      run: |
+        echo "Deploying to production server"
